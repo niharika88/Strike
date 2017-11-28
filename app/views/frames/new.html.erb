@@ -1,0 +1,16 @@
+<h1 class= "header">Play your frame</h1>
+<style>
+.center {
+    position: absolute;
+    left: 0;
+    top: 58%;
+    width: 100%;
+    text-align: center;
+    font-size: 18px;
+}
+</style>
+<%= render 'form', frame: @frame %>
+
+<div class="center">
+<%= button_to "Back to Dashboard", frames_path, :method => "get" %>
+</div>

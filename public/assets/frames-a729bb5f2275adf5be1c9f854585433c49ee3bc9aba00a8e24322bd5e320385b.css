@@ -1,0 +1,31 @@
+/* line 1, /home/stormblessed/Strike/app/assets/stylesheets/frames.scss */
+#customers {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+/* line 7, /home/stormblessed/Strike/app/assets/stylesheets/frames.scss */
+#customers td, #customers th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+/* line 12, /home/stormblessed/Strike/app/assets/stylesheets/frames.scss */
+#customers tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+/* line 14, /home/stormblessed/Strike/app/assets/stylesheets/frames.scss */
+#customers tr:hover {
+  background-color: #ddd;
+}
+
+/* line 16, /home/stormblessed/Strike/app/assets/stylesheets/frames.scss */
+#customers th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;
+}
