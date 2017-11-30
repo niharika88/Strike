@@ -20,6 +20,20 @@ the sum of pins knocked down on the strike (10) plus the number of pins
 knocked down on the next 2 tries.
 Example: try 1(strike): 10|/, try 2: 3|4, score try 1: 17, score try 2: 7, total: 24
 
+## Screenshots
+
+Game Dashboard
+
+![alt text](https://github.com/niharika88/Strike/blob/master/app/assets/images/Screenshot%20from%202017-11-30%2023-27-21.png)
+
+Adding Players
+
+![alt text](https://github.com/niharika88/Strike/blob/master/app/assets/images/Screenshot%20from%202017-11-30%2019-59-36.png)
+
+Game Finish
+
+![alt text](https://github.com/niharika88/Strike/blob/master/app/assets/images/Screenshot%20from%202017-11-30%2020-00-36.png)
+
 ## Code Example
 
 ```
