@@ -72,12 +72,13 @@ run the test suite: Rspec is used ( rspec .) --command for test suit
 
 ## Deployment
 
-Heroku: 
+Heroku: ``` https://arcane-bayou-87876.herokuapp.com/games```
 
 ## Steps for Playing the game
 
 * run the rails server
-* Open mozila firefox (load the application url:``` ```)
+* open localhost/games (if using locally)
+* Open mozila firefox (load the application url:```https://arcane-bayou-87876.herokuapp.com/games ```) (if using heroku)
 * go to /games
 * add players for first time game entry
 * click on add players and make players for game
