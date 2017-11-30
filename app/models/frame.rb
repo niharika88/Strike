@@ -10,7 +10,9 @@ class Frame < ApplicationRecord
 
   validates_uniqueness_of :turn, scope: [:user_id, :game_id]
 
-  before_save :tries_valid?, :global_game_turn_valid?, :score_frame
+  validate :tries_valid?, :global_game_turn_valid?
+
+  before_save :score_frame
   after_save :update_turn
 
 
@@ -57,18 +59,16 @@ class Frame < ApplicationRecord
     self.game.save!
   end
 
-  #Checks if tries are valid for each player
-  def tries_valid?
-    if(self.try1 != nil && self.try2 != nil)
-      if ((self.try1 +  self.try2 ) > 10 )
-        errors.add(:base, 'Enter valid pin entries for each tries')
-      end
-      if ((self.try1 == 10 && self.try2 != 0) || (self.try2 == 10 && self.try1 != 0))
-        errors.add(:base,'In case of strike mark other pin as 0')
-      end
+  # idempotent method, so we don't care if it is called multiple times after frame save
+  # Updates game turn next turn play once all players have played their chances
+  def update_turn
+    if(self.game.game_turn != 10 && (Frame.where('turn = ? and game_id = ?', self.game.game_turn , self.game_id).count == self.game.players))
+      self.game.game_turn += 1
+      self.game.save
     end
   end
 
+  private
   # Checks for frame turn and game turn equality
   # makes sure each player in a game is at the same turn and completes that turn along with other players
   def global_game_turn_valid?
@@ -77,12 +77,15 @@ class Frame < ApplicationRecord
     end
   end
 
-  # idempotent method, so we don't care if it is called multiple times after frame save
-  # Updates game turn next turn play once all players have played their chances
-  def update_turn
-    if((Frame.where('turn = ? and game_id = ?', self.game.game_turn , self.game_id).count == self.game.players))
-      self.game.game_turn += 1
-      self.game.save
+   #Checks if tries are valid for each player
+  def tries_valid?
+    if(self.try1 != nil && self.try2 != nil)
+      if ((self.try1 +  self.try2 ) > 10 )
+        errors.add(:base, 'Enter valid pin entries for each tries')
+      end
+      if ((self.try1 == 10 && self.try2 != 0) || (self.try2 == 10 && self.try1 != 0))
+        errors.add(:base,'In case of strike mark other pin as 0')
+      end
     end
   end
 end

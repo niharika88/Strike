@@ -240,6 +240,9 @@ font-size: 18px;
           Winner
           </h4>
           <h3 class="statistic-value">
+          <% if !(game.winner.empty?) %>
+          <%= User.find(game.winner.keys.first).name %>
+          <% end %>
           </h3>
         </article>
       </section>

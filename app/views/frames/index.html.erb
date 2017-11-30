@@ -156,6 +156,12 @@ top: 100px;
 right: 16px;
 font-size: 18px;
 }
+.bottomright {
+position: absolute;
+bottom: 100px;
+right: 16px;
+font-size: 18px;
+}
 </style>
 <div class="header">Player Dashboard</div>
 <% @frames.each do |id, val| %>
@@ -188,9 +194,13 @@ font-size: 18px;
 <br>
 <% end %>
 <br>
-<% if (@game_turn < 10) %>
+<% if (@game_turn <= 10) %>
 <div class="topright">
   <%= button_to "Play your turn", new_game_frame_path(@game_id), :method => "get" %>
+</div>
+
+<div class="bottomright">
+  <%= button_to "Game Score Board", games_path, :method => "get" %>
 </div>
 <% else %>
 <%= javascript_tag "alert('Game Finish ')" %>
