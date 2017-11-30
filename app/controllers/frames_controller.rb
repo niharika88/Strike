@@ -4,7 +4,9 @@ class FramesController < ApplicationController
   # GET /frames
   # GET /frames.json
   def index
-    @frames = Frame.all
+    @frames = Frame.all.where(:game_id => params[:game_id]).group_by(&:user_id)
+    @game_id = params[:game_id]
+    @game_turn = Game.find(@game_id).game_turn
   end
 
   # GET /frames/1
@@ -15,6 +17,8 @@ class FramesController < ApplicationController
   # GET /frames/new
   def new
     @frame = Frame.new
+    @game_id = params[:game_id]
+    @players = User.where(:id => Game.find(@game_id).score_board.keys)
   end
 
   # GET /frames/1/edit
@@ -23,41 +27,19 @@ class FramesController < ApplicationController
 
   # POST /frames
   # POST /frames.json
+  # requires game id for frames for that game
   def create
-    @frame = Frame.new(frame_params)
-    score = @frame.score_frame(frame_params[:try1],frame_params[:try2])
+    @game_id = params[:game_id]
+    @players = User.where(:id => Game.find(@game_id).score_board.keys)
+    @frame = Frame.new(frame_params.merge!(game_id: @game_id))
     respond_to do |format|
       if @frame.save
-        format.html { redirect_to @frame, notice: 'Frame was successfully created.' }
-        format.json { render :show, status: :created, location: @frame }
+        format.html { redirect_to game_frames_url, notice: 'Frame was successfully created.' }
+        format.json { render :index, status: :created, location: @frame }
       else
         format.html { render :new }
         format.json { render json: @frame.errors, status: :unprocessable_entity }
       end
-    end
-  end
-
-  # PATCH/PUT /frames/1
-  # PATCH/PUT /frames/1.json
-  def update
-    respond_to do |format|
-      if @frame.update(frame_params)
-        format.html { redirect_to @frame, notice: 'Frame was successfully updated.' }
-        format.json { render :show, status: :ok, location: @frame }
-      else
-        format.html { render :edit }
-        format.json { render json: @frame.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /frames/1
-  # DELETE /frames/1.json
-  def destroy
-    @frame.destroy
-    respond_to do |format|
-      format.html { redirect_to frames_url, notice: 'Frame was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 

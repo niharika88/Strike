@@ -3,4 +3,4 @@
 <%= render 'form', frame: @frame %>
 
 <%= link_to 'Show', @frame %> |
-<%= link_to 'Back', frames_path %>
+<%= link_to 'Back', game_frames_path(@frame.game_id) %>

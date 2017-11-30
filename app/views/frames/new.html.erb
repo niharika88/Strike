@@ -1,16 +1,14 @@
 <h1 class= "header">Play your frame</h1>
 <style>
-.center {
+.right {
     position: absolute;
-    left: 0;
-    top: 58%;
+    left: 10;
     width: 100%;
     text-align: center;
     font-size: 18px;
 }
 </style>
-<%= render 'form', frame: @frame %>
-
-<div class="center">
-<%= button_to "Back to Dashboard", frames_path, :method => "get" %>
+<%= render 'form', frame: @frame  %>
+<div class="right">
+<%= button_to  'Back to Player Dashboard', game_frames_path(@game_id), :method => "get" %>
 </div>
