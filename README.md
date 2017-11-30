@@ -101,6 +101,7 @@ Heroku:
 * The game is only for 10 turns and no bonus trun is there for special case, if last throw is strike or spare (for simplicity of execution)
 * The game in future can be extended for the implementation of bonus frame
 * The game works best in Mozila Firefox, avoid using Chrome.
+* In case of multiple players securing higest scores, then only one player is chosen to be winner the first one on the list.
 
 
 
