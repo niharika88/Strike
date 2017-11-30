@@ -12,13 +12,16 @@
 
 ActiveRecord::Schema.define(version: 20171129083807) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "frames", force: :cascade do |t|
     t.integer "try1"
     t.integer "try2"
     t.integer "turn"
     t.integer "score"
-    t.integer "user_id"
-    t.integer "game_id"
+    t.bigint "user_id"
+    t.bigint "game_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "status"
@@ -41,4 +44,6 @@ ActiveRecord::Schema.define(version: 20171129083807) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "frames", "games"
+  add_foreign_key "frames", "users"
 end
